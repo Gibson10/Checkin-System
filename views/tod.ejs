@@ -1,0 +1,99 @@
+<%include partials/header%>
+
+<%if (currentUser.status=="RA"){%>
+    <%include partials/safnav%>
+    <%} else if(currentUser.status=="tod") {%>
+        <%include partials/mannav%>
+    
+    
+        <%} else{%>
+            <%include partials/navigation%>
+            <%}%>
+<%include partials/header%>
+
+
+
+<%include partials/footer%>
+
+<div class="row container-fluid mt-4">
+<div class="col-md-6 mt-4">
+    <!--User Card-->
+    <div class="card mt-4 ml-4 ">
+
+        <!--Card image-->
+        
+
+        <!--Card content-->
+        <div class="card-body">
+            <!--Title-->
+            <div class="row">
+                <div class="">
+                    <span class="text-info"><h5>Absent for checkin today </h5></span><br>
+                        <span class="lead text-danger"> 
+
+                            <%newdoc.forEach(function(doc) {%>
+                                <%=doc%>
+                            <%})%>
+                            
+                                </span>
+                       
+  
+                    
+                </div>
+                
+              
+            </div>
+
+            <!--Text-->
+            
+    
+        <!--/Card image-->
+
+    </div>
+    <!--/.User Graph Card-->
+</div>
+</div>
+<div class="col-md-6 mt-4">
+        <!--User Card-->
+        <div class="card mt-4 ml-4 ">
+    
+            <!--Card image-->
+            
+    
+            <!--Card content-->
+            <div class="card-body">
+                <!--Title-->
+                <div class="row">
+                    <div class="">
+                        <span class="text-info"><h5>Late for checkin today </h5></span><br>
+                            <span class="lead text-warning"> 
+    
+                              
+                                    <%newdoc2.forEach(function(doc) {%>
+                                        <%=doc%>
+                                    <%})%>
+                                
+                                    </span>
+                           
+      
+                        
+                    </div>
+                    
+                  
+                </div>
+    
+                <!--Text-->
+                
+        
+            <!--/Card image-->
+    
+        </div>
+        <!--/.User Graph Card-->
+    </div>
+    </div>
+
+
+</div>
+
+
+<%include partials/footer%>

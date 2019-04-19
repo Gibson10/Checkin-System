@@ -1,0 +1,195 @@
+<%include partials/header%>
+
+<%if (currentUser.status=="RA"){%>
+    <%include partials/safnav%>
+    <%} else if(currentUser.status=="tod") {%>
+        <%include partials/mannav%>
+    
+    
+        <%} else{%>
+            <%include partials/navigation%>
+            <%}%>
+<%include partials/header%>
+
+
+<%include partials/footer%>
+
+<div class="row container-fluid mt-4">
+<div class="col-md-6 mt-4">
+    <!--User Card-->
+    <div class="card mt-4 ml-4 ">
+
+        <!--Card image-->
+        
+
+        <!--Card content-->
+        <div class="card-body">
+            <!--Title-->
+            <div class="row">
+                <div class="">
+                    <span class="text-info"><h5>Sort By name</h5></span><br>
+                        <span class="lead text-danger"> 
+                        <form method="POST" action="/name">
+                            <label for="exampleForm2"class="ml-4">Input name</label>
+                            <input type="text" id="exampleForm2" class="form-control ml-4" name="name">
+                         <button type="submit" class="btn btn-info btn-rounded ml-4">Search</button>
+ 
+                        </form>
+                            
+                            
+                                </span>
+                       
+  
+                    
+                </div>
+                
+              
+            </div>
+
+            <!--Text-->
+            
+    
+        <!--/Card image-->
+
+    </div>
+    <!--/.User Graph Card-->
+</div>
+</div>
+<div class="col-md-6 mt-4">
+        <!--User Card-->
+        <div class="card mt-4 ml-4 ">
+    
+            <!--Card image-->
+            
+    
+            <!--Card content-->
+            <div class="card-body">
+                <!--Title-->
+                <div class="row">
+                    <div class="">
+                        <span class="text-info"><h5>Sort by date </h5></span><br>
+                            <span class="lead text-warning"> 
+    
+                              
+                                
+                                    </span>
+                           
+      
+                        
+                    </div>
+                    
+                  
+                </div>
+    
+                <!--Text-->
+                
+        
+            <!--/Card image-->
+    
+        </div>
+        <!--/.User Graph Card-->
+    </div>
+    </div>
+
+
+    
+
+    <div class="row container-fluid mt-4">
+        <div class="col-md-6 mt-4">
+            <!--User Card-->
+            <div class="card mt-4 ml-4 ">
+        
+                <!--Card image-->
+                
+        
+                <!--Card content-->
+                <div class="card-body">
+                    <!--Title-->
+                    <div class="row">
+                        <div class="">
+                            <span class="text-info"><h5>Sort by hall </h5></span><br>
+                            <form method="POST" action="/hall">
+
+                       
+                                <span class=" text-danger"> 
+                                        <select class="browser-default custom-select ml-4" name="name">
+                                                <option value="office">Office Hall</option>
+                                                                    <option value="titans">Titans Hall </option>
+                                                                    <option value="kushinga">Kushinga Hall </option>
+                                                                    <option value="jeshi">Jeshi Hall </option>
+                                                                    <option value="olympus">Olympus Hall </option>
+                                                                    <option value="classified">Classified Hall </option>
+                                                                    </select>
+
+                                            
+                                              <button type="submit" class="btn btn-info btn-rounded ml-4">Search</button>
+                                    
+                                        </span>
+                                    </form>
+                               
+          
+                            
+                        </div>
+                        
+                      
+                    </div>
+        
+                    <!--Text-->
+                    
+            
+                <!--/Card image-->
+        
+            </div>
+            <!--/.User Graph Card-->
+        </div>
+        </div>
+        <div class="col-md-6 mt-4">
+                <!--User Card-->
+                <div class="card mt-4 ml-4 ">
+            
+                    <!--Card image-->
+                    
+            
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <div class="row">
+                            <div class="">
+                                <span class="text-info"><h5>Get all </h5></span><br>
+                                  
+                                            <form method="POST" action="/all">
+
+                       
+                                                <span class=" text-danger"> 
+                                                        
+                                                            
+                                                              <button type="submit" class="btn btn-info btn-rounded ml-4">Get</button>
+                                                    
+                                                        </span>
+                                                    </form>
+                                      
+                                        
+                                        
+                                   
+              
+                                
+                            </div>
+                            
+                          
+                        </div>
+            
+                        <!--Text-->
+                        
+                
+                    <!--/Card image-->
+            
+                </div>
+                <!--/.User Graph Card-->
+            </div>
+            </div>
+        
+        
+        </div>
+
+
+<%include partials/footer%>

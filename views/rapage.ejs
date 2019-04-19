@@ -1,0 +1,372 @@
+<%include partials/header%>
+
+<%if (currentUser.status=="RA"){%>
+    <%include partials/safnav%>
+    <%} else if(currentUser.status=="tod") {%>
+        <%include partials/mannav%>
+    
+    
+        <%} else{%>
+            <%include partials/navigation%>
+            <%}%>
+<%include partials/header%>
+
+
+
+<%include partials/footer%>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+
+
+<style>    
+    #myInput {
+      background-image: url('/media/searchicon');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 90%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+    
+    </style>
+
+<div class="container mb-3">
+    <div class="col-md-12 mt-4 mb-3">
+        <!--User Card-->
+        <div class="card mt-4 ">
+    
+            <!--Card image-->
+            
+    
+            <!--Card content-->
+            <div class="card-body ">
+                <!--Title-->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                       <span>CHECK IN</span>
+
+                         
+                    </div>
+                    <div class="col-md-12 text-center">
+    
+                    
+                     <section class="mb-5">
+    
+                       
+    
+                        <!--Card-->
+                          <div class="card card-cascade narrower">
+                
+                            <!--Section: Table-->
+                             <section>
+                
+                                <div class="card card-cascade narrower z-depth-0"> 
+                
+                                    <!--Card image-->
+                                    <div class="view gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                
+                                        <div>
+                                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fa fa-th-large mt-0"></i></button>
+                                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fa fa-columns mt-0"></i></button>
+                                        </div>
+                
+                                        <a href="" class="white-text mx-3">Hall members</a>
+                
+                                        <div> 
+                                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fa fa-pencil mt-0"></i></button>
+                                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fa fa-remove mt-0"></i></button>
+                                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fa fa-info-circle mt-0"></i></button>
+                                        </div>
+                
+                                    </div> 
+                                    <!--/Card image-->
+                
+                                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                
+                                    <div class="px-4">
+                
+                                        <div class="table-responsive">
+                                            <!--Table-->
+                                             <table id="myTable"  data-show-header="true" data-pagination="true"
+                                               data-id-field="name"
+                                               data-page-list="[5, 10, 25, 50, 100, ALL]"
+                                               data-page-size="5" class="display table table-hover mb-0"> 
+                
+                                                <!--Table head-->
+                                                <thead>
+                                                    <tr>
+                                                       
+                                                        <th data-field="" class="th-lg"><a>Name<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Hall <i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Room Number<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Email<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <<th data-field="" class="th-lg"><a href="">Phone Number<i class="fa fa-sort ml-1"></i></a></th>
+                                                       
+                
+                                                        <!-- <th data-field="" class="th-lg"><a href="">UniqueCode<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Month<i class="fa fa-sort ml-1"></i></a></th> --> 
+                                                        <!-- <th data-field="" class="th-lg"><a href="">BTC Cash<i class="fa fa-sort ml-1"></i></a></th> -->  
+                                                        <!-- <th data-field="" class="th-lg"><a href="">Cardano<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Ripple<i class="fa fa-sort ml-1"></i></a></th>
+                                                        <th data-field="" class="th-lg"><a href="">Stellar<i class="fa fa-sort ml-1"></i></a></th> -->
+                                                     </tr>
+                                                </thead> 
+                                                <!--Table head-->
+                                 
+                                            <!--Table head-->
+                                           
+                                            
+                                            <!--Table body-->
+                                               
+                                            <tbody id="tBody">
+                                                <script>
+                                                    $.ajax({
+                                                        type: 'GET',
+                                                        url: "http://localhost:2000/checkindata",
+                                                        success: function(logs) {
+                                                           
+
+                                                            console.log(logs)
+
+                                                    
+                                                                
+                                                                for(i=0; i< logs.length; i++){
+                                                                    
+                                                                    
+                                                                    console.log(logs[i].name);
+                                                                   
+        
+                                                              
+    
+        
+                                                                document.getElementById('tBody').innerHTML += '<tr data-toggle="modal" data-target="#' + logs[i].randomUid + '"><td>' + logs[i].name + '</td><td>' + logs[i].hall + '</td><td>'+ logs[i].roomno +'</td><td>'+ logs[i].username +'</td><td>'+  logs[i].phoneno +'</td><td></tr> <div class="modal fade " id="' +logs[i].randomUid + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalLabel"> Hours</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">' + logs[i].name + ' </div><div class="modal-footer"><button type="button" class="btn btn-danger reserve-button" id="'+ logs[i].name +'">absent</button><button type="button" class="btn btn-success reserve-button1" id="'+ logs[i].name +'">Present</button><button type="button" class="btn btn-warning reserve-button2" id="'+ logs[i].name +'" >Late</button></div></div></div></div>' 
+        
+        
+                                                                
+                                                                
+        
+                                                                // $('#b' + i).click(function() {
+                                                                //     var doc = new jsPDF()
+                                                                //     doc.setFontSize(10)
+                                                                //     doc.text('endTimeString', 2,2)
+                                                                //     doc.save('job.pdf')
+                                                                // })
+
+                                                    $('button.reserve-button').on('click', function(e){
+                                                                e.preventDefault();
+                                                                console.log(this.id);
+                                                                var name2=this.id;
+                                                                var status="absent";
+                                                                      
+                                
+                                                     $.ajax
+                                                        ({ 
+                                                            url: '/absent',
+                                                            data:{"status": status, "book_id": name2}, 
+                                                            type: 'post',
+                                                            success: function(result)
+                                                            {
+                                                                $('.modal-box').text(result).fadeIn(700, function() 
+                                                                {
+                                                                    setTimeout(function() 
+                                                                    {
+                                                                        $('.modal-box').fadeOut();
+                                                                    }, 2000);
+                                                                });
+                                                            }
+                                                        });
+
+                                                        });
+
+
+
+
+                                                        $('button.reserve-button1').on('click', function(e){
+                                                                e.preventDefault();
+                                                                console.log(this.id);
+                                                                var name2=this.id;
+                                                                var status="present";
+                                                                      
+                                
+                                                     $.ajax
+                                                        ({ 
+                                                            url: '/absent',
+                                                            data:{"status": status, "book_id": name2}, 
+                                                            type: 'post',
+                                                            success: function(result)
+                                                            {
+                                                                $('.modal-box').text(result).fadeIn(700, function() 
+                                                                {
+                                                                    setTimeout(function() 
+                                                                    {
+                                                                        $('.modal-box').fadeOut();
+                                                                    }, 2000);
+                                                                });
+                                                            }
+                                                        });
+
+                                                        });
+
+
+
+                                                        $('button.reserve-button2').on('click', function(e){
+                                                                e.preventDefault();
+                                                                console.log(this.id);
+                                                                var name2=this.id;
+                                                                var status="late";
+                                                                      
+                                
+                                                     $.ajax
+                                                        ({ 
+                                                            url: '/absent',
+                                                            data:{"status": status, "book_id": name2}, 
+                                                            type: 'post',
+                                                            success: function(result)
+                                                            {
+                                                                $('.modal-box').text(result).fadeIn(700, function() 
+                                                                {
+                                                                    setTimeout(function() 
+                                                                    {
+                                                                        $('.modal-box').fadeOut();
+                                                                    }, 2000);
+                                                                });
+                                                            }
+                                                        });
+
+                                                        });
+        
+                                                            
+                                                            }
+                                                           
+                                            
+                                                                }
+                                                             
+                                                       
+                                                        // $(document).ready(function(){
+        
+                                                        //             $("button").click(function(){
+        
+                                                        //             var doc = new jsPDF()
+                                                        //             doc.setFontSize(10)
+                                                        //             doc.text(pdfstring, 2,2)
+                                                        //             doc.save('job.pdf')
+                                                        //             });
+                                                        //             });
+                                                                 
+        
+        
+        
+                                                     
+        
+        
+                                                                
+                                                       
+                                                        
+                                                    
+                                                        
+                                                         
+                                                    });
+                                                </script>
+                                        </tbody>
+
+                                            <!--Table body-->
+                                             
+    
+                                                <!--Table body-->
+                                               
+                                            </table>
+                                             
+                                            <!-- Table--> 
+                                        <!-- </div> -->
+                                        
+                                        <!-- <script>
+                                         
+                                         function myFunction() {
+                                                  var doc = new jsPDF()
+                
+                                                doc.text('Hello world!', 10, 10)
+                                                doc.save('a4.pdf')
+                                                 }
+                                        </script> -->
+                                        <!-- <hr class="my-0"> -->
+                
+                                        <!--Bottom Table UI-->
+                                        <!-- <div class="d-flex justify-content-between"> -->
+                
+                                            <!--Pagination -->
+                                            <!-- <nav class="my-4">
+                                                <ul id="selector" class="pagination pagination-circle pg-blue mb-0">
+                
+                                                </ul>
+                                            </nav> -->
+                                            <!--/Pagination -->
+                
+                                        <!-- </div> -->
+                                        <!--Bottom Table UI-->
+                
+                                    <!-- </div> -->
+                
+                
+                
+                
+                
+                
+                                      
+                                        
+                                    
+                
+                
+                                    
+                                <!-- </div>
+                
+                            </section> -->
+                            <!--Section: Table-->
+                
+                        </div> 
+                        <!--/.Card-->
+                
+                    </section>
+                    </div>
+                </div>
+                <!--Text-->
+                
+        
+            <!--/Card image-->
+    
+        </div>
+        <!--/.User Graph Card-->
+    </div>
+    </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
