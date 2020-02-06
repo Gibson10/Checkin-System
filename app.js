@@ -16,11 +16,6 @@ var indexRoutes = require("./routes/index"),
     SE          = require ("./routes/seauth");
     Managers     = require ("./routes/managerauth");
     
-   // mongoose.connect("mongodb://localhost/safcorp4");
-//mongodb://africanblockchaininitiative:Banana1@ds125335.mlab.com:25335/ala_election_db
-//mongodb://localhost/ala_elections
-//mongodb://safcorp:Gi10807108@ds145304.mlab.com:45304/safcorp
-//  mongoose.connect("mongodb://safcorp:Gi10807108@ds145304.mlab.com:45304/safcorp");
 mongoose.connect("mongodb://localhost/checkin");
 
 
